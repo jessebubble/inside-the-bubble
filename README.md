@@ -13,9 +13,9 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Resources 
-*[NextJS](https://nextjs.org/)
-*[TypeScript](https://www.typescriptlang.org/)
-*[FireBase](https://firebase.google.com/docs)
-*[React Hot Toast](https://react-hot-toast.com/)
-*[React](https://reactjs.org/)
-*[Fireship](https://www.youtube.com/c/Fireship)
+* [React](https://reactjs.org/)
+* [NextJS](https://nextjs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [FireBase](https://firebase.google.com/docs)
+* [React Hot Toast](https://react-hot-toast.com/)
+* [Fireship](https://www.youtube.com/c/Fireship)
