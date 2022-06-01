@@ -1,11 +1,12 @@
 import styles from '../../styles/Admin.module.css';
 import AuthCheck from '../../components/AuthCheck';
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
+import ImageUploader from '../../components/ImageUploader';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
@@ -25,7 +26,7 @@ function PostManager() {
     const { slug } = router.query;
   
     const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
-    const [post] = useDocumentData(postRef);
+    const [post] = useDocumentDataOnce(postRef);
   
     return (
         <main className={styles.container}>
@@ -42,6 +43,7 @@ function PostManager() {
                         <Link href={`/${post.username}/${post.slug}`}>
                             <button className="btn-blue">Live view</button>
                         </Link>
+                        <DeletePostButton postRef={postRef} />
                     </aside>
                 </>
             )}
@@ -71,6 +73,8 @@ function PostForm({ defaultValues, postRef, preview }) {
                 </div>
             )}
                 <div className={preview ? styles.hidden : styles.controls}>
+                    <ImageUploader />
+
                     <textarea name="content" ref={register({
                         maxLength: { value: 20000, message: 'content is too long' },
                         minLength: { value: 10, message: 'content is too short' },
@@ -90,5 +94,24 @@ function PostForm({ defaultValues, postRef, preview }) {
                     </button>
                 </div>
         </form>
+    );
+}
+function DeletePostButton({ postRef }) {
+    const router = useRouter();
+  
+    const deletePost = async () => {
+
+        const doIt = confirm('are you sure!');
+            if (doIt) {
+                await postRef.delete();
+                router.push('/admin');
+                toast('post annihilated ', { icon: '🗑️' });
+            }
+        };
+  
+    return (
+        <button className="btn-red" onClick={deletePost}>
+            Delete
+        </button>
     );
 }

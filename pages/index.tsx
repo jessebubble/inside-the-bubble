@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css' 
 import Link from 'next/link'; */
 import toast from 'react-hot-toast';
+import Metatags from '../components/Metatags';
 import Loader from '../components/Loader';
 
 import PostFeed from '../components/PostFeed';
@@ -57,13 +58,15 @@ export default function Home(props) {
 
   return (
     <main>
+      <Metatags title="Home Page" description="Get Inside The Bubble" />
+
       <div>
       <button onClick={() => toast.success('hello world!')}>
         Toast Me
       </button>
       </div>
 
-      <PostFeed posts={posts} />
+      <PostFeed posts={posts} admin={undefined} />
 
       {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
 
