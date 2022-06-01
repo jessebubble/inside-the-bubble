@@ -2,6 +2,7 @@ import { auth, firestore, googleAuthProvider } from '../lib/firebase';
 import { useContext, useEffect, useState, useCallback } from 'react';
 import { UserContext } from '../lib/context';
 import debounce from 'lodash.debounce';
+import Metatags from '../components/Metatags';
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -12,7 +13,8 @@ export default function Enter(props) {
     // 3. user signed in, has username SHOW <SignOutButton />
     return (
         <main>
-            {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+          <Metatags title="Enter" description="Get Inside The Bubble!" />
+          {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
         </main>
     );
 }
