@@ -17,5 +17,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 * [NextJS](https://nextjs.org/)
 * [TypeScript](https://www.typescriptlang.org/)
 * [FireBase](https://firebase.google.com/docs)
+* [LoDash](https://lodash.com/)
 * [React Hot Toast](https://react-hot-toast.com/)
+* [React Hook Form](https://react-hook-form.com/)
+* [React MarkDown](https://github.com/remarkjs/react-markdown)
 * [Fireship](https://www.youtube.com/c/Fireship)
