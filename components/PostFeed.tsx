@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import { Key } from 'react';
 
 export default function PostFeed({ posts, admin }) {
-    return posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null;
+    return posts ? posts.map((post: { slug: Key; }) => <PostItem post={post} key={post.slug} admin={admin} />) : null;
 }
 
 function PostItem({ post, admin = false }) {

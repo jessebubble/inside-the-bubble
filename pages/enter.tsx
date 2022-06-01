@@ -1,12 +1,12 @@
 import { auth, firestore, googleAuthProvider } from '../lib/firebase';
 import { useContext, useEffect, useState, useCallback } from 'react';
 import { UserContext } from '../lib/context';
-import debounce from 'lodash.debounce';
 import Metatags from '../components/Metatags';
+const debounce = require('lodash.debounce');
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Enter(props) {
+export default function Enter(props: any) {
     const { user, username } = useContext(UserContext)
     // 1. user signed out SHOW <SignInButton />
     // 2. user signed in, but missing username SHOW <UsernameForm />
@@ -24,9 +24,14 @@ function SignInButton() {
         await auth.signInWithPopup(googleAuthProvider);
     };
     return (
+      <>
         <button className='btn-google' onClick={signInWithGoogle}>
             <img src={'/google.png'} alt="letter g" width='30px' /> Sign in with Google
         </button>
+        <button onClick={() => auth.signInAnonymously()}>
+        Sign in Anonymously
+        </button>
+      </>
     );
 }
 // Sign out button
@@ -41,7 +46,7 @@ function UsernameForm() {
 
     const { user, username } = useContext(UserContext);
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
     
         // Create refs for both documents
@@ -55,7 +60,7 @@ function UsernameForm() {
     
         await batch.commit();
     };
-    const onChange = (e) => {
+    const onChange = (e: { target: { value: string; }; }) => {
         // Force form value typed in form to match correct format
         const val = e.target.value.toLowerCase();
         const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
@@ -78,7 +83,7 @@ function UsernameForm() {
     // Hit the database for username match after each debounced change
     // useCallback is required for debounce to work
     const checkUsername = useCallback(
-        debounce(async (username) => {
+        debounce(async (username: string | any[]) => {
         if (username.length >= 3) {
             const ref = firestore.doc(`usernames/${username}`);
             const { exists } = await ref.get();

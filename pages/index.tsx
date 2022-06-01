@@ -1,20 +1,14 @@
-/* import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css' 
-import Link from 'next/link'; */
-import toast from 'react-hot-toast';
 import Metatags from '../components/Metatags';
-import Loader from '../components/Loader';
-
 import PostFeed from '../components/PostFeed';
+import Loader from '../components/Loader';
 import { firestore, fromMillis, postToJSON } from '../lib/firebase';
-
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 // Max post to query per page
 const LIMIT = 10;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   const postsQuery = firestore
     .collectionGroup('posts')
     .where('published', '==', true)
@@ -27,7 +21,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function Home(props) {
+export default function Home(props: { posts: any; }) {
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +40,7 @@ export default function Home(props) {
       .startAfter(cursor)
       .limit(LIMIT);
 
-    const newPosts = (await query.get()).docs.map((doc) => doc.data());
+    const newPosts = (await query.get()).docs.map((doc: { data: () => any; }) => doc.data());
 
     setPosts(posts.concat(newPosts));
     setLoading(false);
@@ -60,10 +54,16 @@ export default function Home(props) {
     <main>
       <Metatags title="Home Page" description="Get Inside The Bubble" />
 
+      <div className="card card-info">
+        <h2> Inside The Bubble</h2>
+        <p>Welcome! This app is built with Next.js and Firebase and is loosely inspired by Dev.to.</p>
+        <p>Sign up for an 👨‍🎤 account, ✍️ write posts, then 💞 heart content created by other users. All public content is server-rendered and search-engine optimized.</p>
+      </div>
+
       <div>
       <button onClick={() => toast.success('hello world!')}>
         Toast Me
-      </button>
+        </button>
       </div>
 
       <PostFeed posts={posts} admin={undefined} />

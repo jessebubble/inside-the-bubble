@@ -9,7 +9,7 @@ export default function ImageUploader() {
     const [downloadURL, setDownloadURL] = useState(null);
 
     // Creates a Firebase Upload Task
-    const uploadFile = async (e) => {
+    const uploadFile = async (e: { target: { files: Iterable<unknown> | ArrayLike<unknown>; }; }) => {
     // Get the file
     const file = Array.from(e.target.files)[0];
     const extension = file.type.split('/')[1];
@@ -22,14 +22,14 @@ export default function ImageUploader() {
     const task = ref.put(file);
 
     // Listen to updates to upload task
-    task.on(STATE_CHANGED, (snapshot) => {
+    task.on(STATE_CHANGED, (snapshot: { bytesTransferred: number; totalBytes: number; }) => {
         const pct = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(0);
         setProgress(pct);
   
         // Get downloadURL AFTER task resolves (Note: this is not a native Promise)
         task
-          .then((d) => ref.getDownloadURL())
-          .then((url) => {
+          .then((d: any) => ref.getDownloadURL())
+          .then((url: any) => {
             setDownloadURL(url);
             setUploading(false);
           });
