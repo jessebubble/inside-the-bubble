@@ -1,5 +1,5 @@
 import Link from 'next/link';
-const ReactMarkdown =require('react-markdown');
+import ReactMarkdown from 'react-markdown';
 
 // UI component for main post content
 export default function PostContent({ post }) {
