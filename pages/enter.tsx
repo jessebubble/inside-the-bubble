@@ -2,7 +2,7 @@ import { auth, firestore, googleAuthProvider } from '../lib/firebase';
 import { useContext, useEffect, useState, useCallback } from 'react';
 import { UserContext } from '../lib/context';
 import Metatags from '../components/Metatags';
-const debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -46,7 +46,7 @@ function UsernameForm() {
 
     const { user, username } = useContext(UserContext);
 
-    const onSubmit = async (e: { preventDefault: () => void; }) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
     
         // Create refs for both documents
@@ -60,7 +60,7 @@ function UsernameForm() {
     
         await batch.commit();
     };
-    const onChange = (e: { target: { value: string; }; }) => {
+    const onChange = (e) => {
         // Force form value typed in form to match correct format
         const val = e.target.value.toLowerCase();
         const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
