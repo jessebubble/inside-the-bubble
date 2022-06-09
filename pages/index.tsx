@@ -55,14 +55,15 @@ export default function Home(props: { posts: any; }) {
       <Metatags title="Home Page" description="Get Inside The Bubble" />
 
       <div className="card card-info">
-        <h2> Inside The Bubble</h2>
-        <p>Welcome! This app is built with Next.js and Firebase and is loosely inspired by Dev.to.</p>
-        <p>Sign up for an 👨‍🎤 account, ✍️ write posts, then 💞 heart content created by other users. All public content is server-rendered and search-engine optimized.</p>
+        <h2> 🫧 Inside The Bubble 🫧</h2>
+        <p>Music loving 👨‍🎤 FujiFilm enthusiast 📷 Supporter of local craft beer 🍺</p>
+        <p>From the world of property and casualty insurance to becoming a Full Time Web Developer 🧑‍💻</p>
+        <p>Follow my path from Zero Experience to Entry Level and everything in between 🎬</p>
       </div>
 
       <div>
-      <button onClick={() => toast.success('hello world!')}>
-        Toast Me
+      <button onClick={() => toast.success('Hello World! 🌐')}>
+      🥃
         </button>
       </div>
 
