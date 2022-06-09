@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Enter(props: any) {
+export default function Enter(props) {
     const { user, username } = useContext(UserContext)
     // 1. user signed out SHOW <SignInButton />
     // 2. user signed in, but missing username SHOW <UsernameForm />
